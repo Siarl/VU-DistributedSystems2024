@@ -1,6 +1,0 @@
-#cloud-config
-chpasswd:
-  list: |
-    ubuntu:foobar
-  expire: False
-

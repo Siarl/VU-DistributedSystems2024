@@ -32,11 +32,11 @@ EOF
 # Create cloud-init image
 genisoimage -o "data/$name/seed.iso" \
 	-V cidata \
-	-r -J user-data.yml "data/$name/meta-data"
+	-r -J user-data "data/$name/meta-data"
 
 # Create overlay image
 qemu-img create \
 	-o backing_file=../oracular.img,backing_fmt=qcow2 \
 	-f qcow2 \
-	"data/$name/img.cow"
+	"data/$name/img.cow" 10G
 

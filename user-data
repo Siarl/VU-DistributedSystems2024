@@ -1,0 +1,32 @@
+#cloud-config
+users:
+  - name: user
+    groups: [sudo]
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_import_id:
+      - gh:Siarl
+      - gh:donalshortt
+      - gh:maheshhari
+    lock_passwd: true
+    shell: /bin/bash
+
+## Add sched-ext enabled kernel
+apt:
+  sources:
+    schedext:
+      source: ppa:arighi/sched-ext
+
+# Install sched-ext kernel by upgrading
+package_upgrade: true
+
+packages:
+  - git
+  - clang
+  - linux-tools-common
+
+power_state:
+  mode: reboot
+  message: "Rebooting into the new kernel..."
+  timeout: 30
+  condition: True
+
