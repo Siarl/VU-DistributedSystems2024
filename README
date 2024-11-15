@@ -1,2 +1,13 @@
 Experimenting with the sched_ext Linux kernel feature.
 
+## Virtual Machines for testing
+
+Requires packages `qemu-img`, `qemu-system-x86`, `cdrtools` and `cloud-init`.
+
+### setup.sh
+Creates the ./data directory with the base image (Ubuntu Oracular). 
+Then creates an overlay qcow2 image, and a cloud-init boot image.
+
+### start.sh
+Starts qemu with the data created by setup.sh and exposes ssh on a random port.
+
