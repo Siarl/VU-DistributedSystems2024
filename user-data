@@ -6,7 +6,7 @@ users:
     ssh_import_id:
       - gh:Siarl
       - gh:donalshortt
-      - gh:maheshhari
+      #- gh:maheshhari # no keys
     lock_passwd: true
     shell: /bin/bash
 
@@ -14,7 +14,7 @@ users:
 apt:
   sources:
     schedext:
-      source: ppa:arighi/sched-ext
+      source: "ppa:arighi/sched-ext"
 
 # Install sched-ext kernel by upgrading
 package_upgrade: true
