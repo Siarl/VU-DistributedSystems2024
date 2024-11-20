@@ -20,9 +20,15 @@ apt:
 package_upgrade: true
 
 packages:
+  - zsh
   - git
   - clang
   - linux-tools-common
+  - libbpf-dev
+  - openjdk-24-jdk
+
+runcmd:
+  - [su, user, -c, "git clone https://github.com/parttimenerd/hello-ebpf.git ~/hello-ebpf"]
 
 power_state:
   mode: reboot
