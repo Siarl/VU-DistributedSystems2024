@@ -25,7 +25,7 @@ echo "ssh user@localhost -p $port -o StrictHostKeyChecking=no" > ./data/$name/ss
 chmod +x ./data/$name/ssh
 
 echo "Starting VM $name at port $port"
-echo "For remote shell, execute: ./data/$name/ssh"
+echo "For remote shell, execute: ./shell.sh $name"
 echo "The VM will reboot once setup is complete!"
 
 sleep 10;
