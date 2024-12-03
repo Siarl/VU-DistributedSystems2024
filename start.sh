@@ -30,7 +30,12 @@ echo "The VM will reboot once setup is complete!"
 
 sleep 10;
 
-qemu-system-x86_64 \
+qemu_exe="$(which qemu-system-x86)";
+[[ ! -f $qemu_exe ]] && qemu_exe="/usr/libexec/qemu-kvm";
+echo "Using $qemu_exe"
+
+
+"$qemu_exe" \
 	-m 2G \
 	-smp 1 \
 	-enable-kvm \
