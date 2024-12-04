@@ -40,3 +40,14 @@ qemu-img create \
 	-f qcow2 \
 	"data/$name/img.cow" 10G
 
+# Select random port
+# Find available port (and hope it doesnt get used by others)
+while
+  port=$(shuf -n 1 -i 49152-65535)
+  netstat -atun | grep -q "$port"
+do
+  continue
+done
+
+echo "$port" > ./data/$name/port
+
