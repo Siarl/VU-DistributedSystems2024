@@ -14,7 +14,7 @@ run_experiment()
 
 	# Run the scheduler
 	if [ "$1" != "HOST" ]; then
-		./run.sh $1
+		./run.sh $1 &
 		sleep 1;
 		check_if_scheduler_enabled
 	fi
@@ -29,7 +29,7 @@ run_experiment()
 	# collect the et, mem & cpu
 	#
 	
-
+	wait
 }
 
 check_if_benchmark_downloaded()
