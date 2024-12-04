@@ -15,14 +15,14 @@ run_experiment()
 	# Run the scheduler
 	if [ "$1" != "HOST" ]; then
 		./run.sh $1
+		sleep 1;
+		check_if_scheduler_enabled
 	fi
 	
-	sleep 1;
-	check_if_scheduler_enabled
-
 	# Run the benchmark
-	java -jar renaissance-gpl-0.16.0.jar 
-
+	time java -jar renaissance-gpl-0.16.0.jar finagle-http --json $1_bench_results.txt.2 -r 1
+	grep -E "Elapsed|Maximum resident set size|Percent of CPU" $1_bench_results.txt
+	
 	
 
 	# change the compiler
@@ -38,9 +38,9 @@ check_if_benchmark_downloaded()
 
 	script_dir=$(dirname "$(realpath "$0")")
 
-	if [ -f "$script_dir/$file_to_check" ]; then
-		echo "The benchmarker '$file_to_check' is here!"
-	else
+	echo "WEEEE:$script_dir/$file_to_check "
+
+	if [ ! -f "$script_dir/$file_to_check" ]; then
 		echo "The benchmarker '$file_to_check' does NOT exist in the same directory as the script. Downloading..."
 		wget https://github.com/renaissance-benchmarks/renaissance/releases/download/v0.16.0/renaissance-gpl-0.16.0.jar
 	fi
@@ -95,7 +95,7 @@ main()
     shift "$((OPTIND - 1))"
 
 	check_if_sudo
-	#check_if_ebpf
+	check_if_ebpf
 	check_if_benchmark_downloaded
 	
 	for scheduler in "${default_schedulers[@]}"; do
