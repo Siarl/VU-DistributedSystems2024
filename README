@@ -4,10 +4,19 @@ Experimenting with the sched_ext Linux kernel feature.
 
 Requires packages `qemu-img`, `qemu-system-x86`, `cdrtools` and `cloud-init`.
 
+### start.sh
+
+Uses setup.sh if it detects no vm data.
+Starts qemu with the data created by setup.sh and exposes ssh on a random port.
+
+You can stop the vm by using qemu commands. (Ctrl+A C, system_powerdown).
+
+### shell.sh
+
+A shorthand to open a shell on the VM.
+
+
 ### setup.sh
 Creates the ./data directory with the base image (Ubuntu Oracular). 
 Then creates an overlay qcow2 image, and a cloud-init boot image.
-
-### start.sh
-Starts qemu with the data created by setup.sh and exposes ssh on a random port.
 

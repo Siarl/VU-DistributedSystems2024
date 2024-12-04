@@ -13,13 +13,9 @@ if [ ! -d "data/$name" ]; then
 	echo "./setup.sh done"
 fi
 
-# Find available port
-while
-  port=$(shuf -n 1 -i 49152-65535)
-  netstat -atun | grep -q "$port"
-do
-  continue
-done
+# Check if port available
+port="$(cat "data/$name/port")"
+(netstat -atun | grep -q "$port") && echo "Port available" || (echo "Port in use" && exit 1);
 
 echo "ssh user@localhost -p $port -o StrictHostKeyChecking=no" > ./data/$name/ssh
 chmod +x ./data/$name/ssh
@@ -30,7 +26,12 @@ echo "The VM will reboot once setup is complete!"
 
 sleep 10;
 
-qemu-system-x86_64 \
+qemu_exe="$(which qemu-system-x86)";
+[[ ! -f $qemu_exe ]] && qemu_exe="/usr/libexec/qemu-kvm";
+echo "Using $qemu_exe"
+
+
+"$qemu_exe" \
 	-m 2G \
 	-smp 1 \
 	-enable-kvm \
