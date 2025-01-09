@@ -28,11 +28,12 @@ packages:
   - openjdk-24-jdk
 
 runcmd:
-  - [su, user, -c, "git clone https://github.com/parttimenerd/hello-ebpf.git ~/hello-ebpf"]
+  - [su, user, -c, "git clone https://github.com/donalshortt/VU-DS-hello-ebpf.git ~/hello-ebpf"]
+  - [su, user, -c, "git clone https://github.com/Siarl/VU-DistributedSystems2024.git ~/VU-DistributedSystems2024"]
 
 power_state:
   mode: reboot
   message: "Rebooting into the new kernel..."
-  timeout: 30
+  timeout: 10
   condition: True
 

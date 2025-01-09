@@ -14,13 +14,15 @@ run_experiment()
 
 	# Run the scheduler
 	if [ "$1" != "HOST" ]; then
-		./run.sh $1
+		./run.sh $1 &
+		SCHED_PID=$!
 		sleep 1;
 		check_if_scheduler_enabled
 	fi
 	
 	# Run the benchmark
-	time java -jar renaissance-gpl-0.16.0.jar finagle-http --json $1_bench_results.txt.2 -r 1
+	#time java -jar renaissance-gpl-0.16.0.jar finagle-http --json $1_bench_results.txt.2 -r 1
+	time java -jar renaissance-gpl-0.16.0.jar finagle-http --json $1_bench_results.txt -r 50
 	grep -E "Elapsed|Maximum resident set size|Percent of CPU" $1_bench_results.txt
 	
 	
@@ -29,7 +31,11 @@ run_experiment()
 	# collect the et, mem & cpu
 	#
 	
-
+	# do other stuff
+	if [[ $SCHED_PID != "" ]]; then
+		echo "Killing scheduler..."
+		kill $SCHED_PID
+	fi
 }
 
 check_if_benchmark_downloaded()
