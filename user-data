@@ -6,7 +6,6 @@ users:
     ssh_import_id:
       - gh:Siarl
       - gh:donalshortt
-      #- gh:maheshhari # no keys
     lock_passwd: true
     shell: /bin/bash
 
@@ -14,7 +13,7 @@ users:
 apt:
   sources:
     schedext:
-      source: "ppa:arighi/sched-ext"
+      source: "ppa:cappelikan/ppa"
 
 # Install sched-ext kernel by upgrading
 package_upgrade: true
@@ -26,8 +25,11 @@ packages:
   - linux-tools-common
   - libbpf-dev
   - openjdk-24-jdk
+  - pkexec
+  - mainline
 
 runcmd:
+  - [mainline, install, "6.12.3"]
   - [su, user, -c, "git clone https://github.com/donalshortt/VU-DS-hello-ebpf.git ~/hello-ebpf"]
   - [su, user, -c, "git clone https://github.com/Siarl/VU-DistributedSystems2024.git ~/VU-DistributedSystems2024"]
 
