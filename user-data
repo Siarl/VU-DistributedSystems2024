@@ -30,7 +30,7 @@ packages:
 
 runcmd:
   - [mainline, install, "6.12.3"]
-  - [su, user, -c, "git clone https://github.com/donalshortt/VU-DS-hello-ebpf.git ~/hello-ebpf"]
+  - [su, user, -c, "git clone https://github.com/donalshortt/VU-DS-hello-ebpf.git ~/VU-DS-hello-ebpf"]
   - [su, user, -c, "git clone https://github.com/Siarl/VU-DistributedSystems2024.git ~/VU-DistributedSystems2024"]
 
 power_state:
